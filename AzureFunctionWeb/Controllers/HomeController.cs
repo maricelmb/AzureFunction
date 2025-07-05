@@ -1,6 +1,8 @@
 using System.Diagnostics;
+using System.Text.Json.Serialization;
 using AzureFunctionWeb.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace AzureFunctionWeb.Controllers
 {
@@ -25,9 +27,16 @@ namespace AzureFunctionWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(SalesRequest salesRequest)
         {
+            salesRequest.Id = Guid.NewGuid().ToString();
             using var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri("http://localhost:7052/api/");
-            await client.GetAsync("OnSalesUploadWriteToQueue");
+
+            using (var content = new StringContent(JsonConvert.SerializeObject(salesRequest),
+                System.Text.Encoding.UTF8, "application/json"))
+            {
+                HttpResponseMessage response = await client.PostAsync("OnSalesUploadWriteToQueue", content);
+                string returnValue = await response.Content.ReadAsStringAsync();
+            }
 
             return RedirectToAction(nameof(Index));
         }
