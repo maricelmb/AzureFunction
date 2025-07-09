@@ -13,7 +13,7 @@ builder.Services
     .AddApplicationInsightsTelemetryWorkerService()
     .ConfigureFunctionsApplicationInsights();
 
-string connectionString = Environment.GetEnvironmentVariable("AzureWebJobsStorage");
+string connectionString = Environment.GetEnvironmentVariable("AzureSqlDatabase");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
