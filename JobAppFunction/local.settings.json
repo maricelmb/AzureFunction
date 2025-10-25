@@ -2,11 +2,11 @@
     "IsEncrypted": false,
   "Values": {
     //key of the storage account connection string
-    
+    "AzureWebJobsStorage": "@Microsoft.KeyVault(SecretUri=https://azfuncdemo.vault.azure.net/secrets/StorageAccountKeyFunction)",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
     //cloud db connection string
     //"AzureSqlDatabase": "Server=localhost;Database=AzureFunctions;Trusted_Connection=True;TrustServerCertificate=true;"
     //local db connection string
-    "AzureSqlDatabase": "Server=localhost;Database=AzureFunctions;Trusted_Connection=True;TrustServerCertificate=true;"
+    "AzureSqlDatabase": "Server=localhost;Database=AzureFunctions;Trusted_Connection=True;TrustServerCertificate=true;"    
   }
 }
