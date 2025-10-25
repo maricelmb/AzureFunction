@@ -2,7 +2,7 @@
     "IsEncrypted": false,
   "Values": {
     //key of the storage account connection string
-    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=azfundamentalsfunction;AccountKey=fXahmQYcD9hfFZOVdjpnjX09MwYboMhM6D+MNoEk0UCuJMq28mE1K/OKQcP9lh0SeTFsFV4fdLas+ASthXA6uQ==;EndpointSuffix=core.windows.net",
+    
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
     //cloud db connection string
     //"AzureSqlDatabase": "Server=localhost;Database=AzureFunctions;Trusted_Connection=True;TrustServerCertificate=true;"
