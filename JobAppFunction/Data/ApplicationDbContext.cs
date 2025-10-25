@@ -16,7 +16,7 @@ namespace JobAppFunction.Data
         {           
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<SalesRequest>(entity => entity.HasKey (e => e.Id));
+            modelBuilder.Entity<SalesRequest>(entity => entity.HasKey (e => e.Id)); // id is the PK of this table
         }
     }
 }

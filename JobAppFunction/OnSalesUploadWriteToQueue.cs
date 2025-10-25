@@ -17,10 +17,9 @@ public class OnSalesUploadWriteToQueue
     }
 
     [Function("OnSalesUploadWriteToQueue")]
-    //[QueueOutput("SalesRequestInbound", Connection = "AzureWebJobsStorage")]
+    [QueueOutput("SalesRequestInbound", Connection = "AzureWebJobsStorage")] //Bind output(SalesRequest) to Queue
     public async Task<SalesRequest> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequest req)
-    {
-        //return new OkObjectResult("Hello, World!");
+    {        
         string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
         SalesRequest? data = JsonConvert.DeserializeObject<SalesRequest>(requestBody);
 

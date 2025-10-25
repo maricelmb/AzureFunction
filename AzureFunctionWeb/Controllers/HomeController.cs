@@ -1,8 +1,7 @@
-using System.Diagnostics;
-using System.Text.Json.Serialization;
 using AzureFunctionWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace AzureFunctionWeb.Controllers
 {
@@ -25,12 +24,16 @@ namespace AzureFunctionWeb.Controllers
         // http://localhost:7052/api/OnSalesUploadWriteToQueue
 
         [HttpPost]
+        // getting data from form, convert to json and send to azure function endpoint
         public async Task<IActionResult> Index(SalesRequest salesRequest)
         {
             salesRequest.Id = Guid.NewGuid().ToString();
+
+            //create client for az function & set base address
             using var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri("http://localhost:7052/api/");
 
+            //convert to json and send to az function endpoint
             using (var content = new StringContent(JsonConvert.SerializeObject(salesRequest),
                 System.Text.Encoding.UTF8, "application/json"))
             {

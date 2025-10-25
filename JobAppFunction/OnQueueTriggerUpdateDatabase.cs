@@ -21,6 +21,7 @@ public class OnQueueTriggerUpdateDatabase
         _dbContext = dbContext;
     }
 
+    //this function get triggered when the AZ Storage queue is updated
     [Function(nameof(OnQueueTriggerUpdateDatabase))]
     public void Run([QueueTrigger("SalesRequestInbound")] QueueMessage message)
     {
