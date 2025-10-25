@@ -1,24 +1,26 @@
 using JobAppFunction.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace JobAppFunction;
 
-public class Function1
+public class OnSalesUploadWriteToQueue
 {
-    private readonly ILogger<Function1> _logger;
+    private readonly ILogger<OnSalesUploadWriteToQueue> _logger;
 
-    public Function1(ILogger<Function1> logger)
+    public OnSalesUploadWriteToQueue(ILogger<OnSalesUploadWriteToQueue> logger)
     {
         _logger = logger;
     }
 
     [Function("OnSalesUploadWriteToQueue")]
-    [QueueOutput("SalesRequestInbound", Connection = "AzureWebJobsStorage")]
+    //[QueueOutput("SalesRequestInbound", Connection = "AzureWebJobsStorage")]
     public async Task<SalesRequest> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequest req)
     {
+        //return new OkObjectResult("Hello, World!");
         string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
         SalesRequest? data = JsonConvert.DeserializeObject<SalesRequest>(requestBody);
 
